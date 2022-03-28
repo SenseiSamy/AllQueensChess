@@ -2,6 +2,13 @@
 #include<stdlib.h>
 #include<string.h>
 
+typedef struct position
+{   
+    int x;
+    int y;
+} Position;
+
+
 /*-- Fonction de sauvegardes --*/
 int* lire_chessboard(FILE *nom_fichier, int chessboard[5][5]){
     /*Lit un fichier stockant le chessboard et renvoie un Array2D décrivant les valeurs des cellules de la grille*/
