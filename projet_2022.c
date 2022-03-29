@@ -34,7 +34,7 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
     {
         if (orig.x == fin.x || orig.y == fin.y) /*Vérifie les mouvements rectilignes*/
             return 0;
-        if (abs(fin.x - orig.x) == abs(fin.y - fin.x)) /*Vérifie les mouvements diagonaux*/
+        if (abs(fin.x - orig.x) == abs(fin.y - orig.y)) /*Vérifie les mouvements diagonaux*/
             return 0;
     }
     return 1;
