@@ -30,6 +30,14 @@ void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
 /*-- Fonctions de jeu --*/
 int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
     /*Vérifie si un mouvement d'un reine est possible, renvoie 0 si le déplacement est possible, renvoie 1 sinon*/
+    if (chessboard[fin.y][fin.x] == 0) /*Vérifie que la position d'arrivée est libre*/
+    {
+        if (orig.x == fin.x || orig.y == fin.y) /*Vérifie les mouvements rectilignes*/
+            return 0;
+        if (abs(fin.x - orig.x) == abs(fin.y - fin.x)) /*Vérifie les mouvements diagonaux*/
+            return 0;
+    }
+    return 1;
 }
 
 int winning(int chessboard[5][5]){
