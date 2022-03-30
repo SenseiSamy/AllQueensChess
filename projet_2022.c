@@ -72,9 +72,50 @@ void afficher_chessboard(int chessboard[5][5]){
     }
 }
 
+Position *coord_to_pos(char coord[2]){
+    /*Converti une coordonnée de la grille en structure position (ex: A3 -> pos.x = 0, pos.y = 2)*/
+    Position *pos = malloc(sizeof(Position));
+    switch (coord[0])
+    {
+        case 'A':
+            pos->x = 0;
+            break;
+        case 'B':
+            pos->x = 1;
+            break;
+        case 'C':
+            pos->x = 2;
+            break;
+        case 'D':
+            pos->x = 3;
+            break;
+        default:
+            pos->x = 4;
+            break;
+    }
+    switch (coord[1])
+    {
+        case '1':
+            pos->y = 0;
+            break;
+        case '2':
+            pos->y = 1;
+            break;
+        case '3':
+            pos->y = 2;
+            break;
+        case '4':
+            pos->y = 3;
+            break;
+        default:
+            pos->y = 4;
+            break;
+    }
+    return pos;
+}
+
 int main(void){
     FILE *fichier = NULL;
     int chessboard[5][5] = {{1,2,1,2,1}, {0,0,0,0,0}, {2,0,0,0,1}, {0,0,0,0,0}, {2,1,2,1,2}};
-    ecrire_chessboard(chessboard, fichier);
     return 0;
 }
