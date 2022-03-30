@@ -44,6 +44,34 @@ int winning(int chessboard[5][5]){
     /*Vérifie si un joueur a gagné en vérifiant le plateau*/
 }
 
+void afficher_chessboard(int chessboard[5][5]){
+    /*Affiche le chessboard dans le terminal*/
+    printf("\e[1;1H\e[2J"); /*Clear le terminal*/
+    printf("    A   B   C   D   E\n");
+    printf("  ---------------------\n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d |", i+1);
+        for (int y = 0; y < 5; y++)
+        {
+            switch (chessboard[i][y])
+            {
+                case 1:
+                    printf(" N |");
+                    break;
+                case 2:
+                    printf(" R |");
+                    break;
+                default:
+                    printf("   |");
+                    break;
+            }
+        }
+        printf("\n");
+        printf("  ---------------------\n");
+    }
+}
+
 int main(void){
     FILE *fichier = NULL;
     int chessboard[5][5] = {{1,2,1,2,1}, {0,0,0,0,0}, {2,0,0,0,1}, {0,0,0,0,0}, {2,1,2,1,2}};
