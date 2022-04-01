@@ -12,6 +12,7 @@ typedef struct position
 /*-- Fonction de sauvegardes --*/
 int *lire_chessboard(FILE *fichier, int *chessboard[5][5]){
     /*Lit un fichier stockant le chessboard et renvoie un Array2D décrivant les valeurs des cellules de la grille*/
+    fichier = fopen("sauvegarde.txt", "r");
 }
 
 void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
@@ -40,8 +41,23 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
     return 1;
 }
 
-int winning(int *chessboard[5][5]){
+int winning(int chessboard[5][5]){
+    int i,j,count=0;
     /*Vérifie si un joueur a gagné en vérifiant le plateau*/
+    for(i=0 ; i < 5 ;i++){
+        for(j=0;j < 5;j++){
+            if(){
+                return 1;
+            }
+        }
+    }
+    for(i=0 ; i < 5 ;i++){
+        for(j=0;j < 5;j++){
+            if(){
+                return 2;
+            }
+        }
+    }
 }
 
 void afficher_chessboard(int chessboard[5][5]){
