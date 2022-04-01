@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include <time.h>
 
 typedef struct position
 {   
@@ -130,8 +131,22 @@ Position *coord_to_pos(char coord[2]){
     return pos;
 }
 
+void deplacer_reine(Position orig, Position fin, int chessboard[5][5]){
+    chessboard[fin.y][fin.x] = chessboard[orig.y][orig.x];
+    chessboard[orig.y][orig.x] = 0;
+}
+
 int main(void){
     FILE *fichier = NULL;
     int chessboard[5][5] = {{1,2,1,2,1}, {0,0,0,0,0}, {2,0,0,0,1}, {0,0,0,0,0}, {2,1,2,1,2}};
+    while (winning(chessboard) == 0) /*Boucle principale du programme*/
+    {
+        afficher_chessboard(chessboard[5][5]);
+    }
+    if (winning(chessboard) == 1){
+        printf("Le joueur 1 a gagné !");
+    } else{
+        printf("Le joueur 2 a gagné !");
+    }
     return 0;
 }
