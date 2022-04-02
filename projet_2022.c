@@ -43,22 +43,35 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
 }
 
 int winning(int chessboard[5][5]){
-    int i,j,count=0;
+    int i,j,count_white=0,count_black=0;
     /*Vérifie si un joueur a gagné en vérifiant le plateau*/
     for(i=0 ; i < 5 ;i++){
         for(j=0;j < 5;j++){
-            if(){
-                return 1;
+            if(chessboard[i][j] == 1){
+                count_white += 1;
+                if(count_white == 4){
+                    return 1;
+                }
+            }
+            else{
+                count_white=0;
             }
         }
     }
     for(i=0 ; i < 5 ;i++){
         for(j=0;j < 5;j++){
-            if(){
-                return 2;
+            if(chessboard[i][j] == 2){
+                count_black += 1;
+                if(count_black == 4){
+                    return 2;
+                }
+            }
+            else{
+                count_black=0;
             }
         }
     }
+    return 0;
 }
 
 void afficher_chessboard(int chessboard[5][5]){
