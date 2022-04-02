@@ -98,6 +98,32 @@ int winning(int chessboard[5][5]){
     // autre coté
 
     /*En colonne*/
+    for(i=0 ; i < 5 ;i++){
+        for(j=0;j < 5;j++){
+            if(chessboard[j][i] == 1){
+                count_white += 1;
+                if(count_white == 4){
+                    return 1;
+                }
+            }
+            else{
+                count_white=0;
+            }
+        }
+    }
+    for(i=0 ; i < 5 ;i++){
+        for(j=0;j < 5;j++){
+            if(chessboard[j][i] == 2){
+                count_black += 1;
+                if(count_black == 4){
+                    return 2;
+                }
+            }
+            else{
+                count_black=0;
+            }
+        }
+    }
     return 0;
 }
 
