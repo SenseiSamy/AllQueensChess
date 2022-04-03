@@ -11,9 +11,18 @@ typedef struct position
 
 
 /*-- Fonction de sauvegardes --*/
-int *lire_chessboard(FILE *fichier, int *chessboard[5][5]){
+int lire_chessboard(FILE *fichier, int chessboard[5][5]){
     /*Lit un fichier stockant le chessboard et renvoie un Array2D décrivant les valeurs des cellules de la grille*/
+    int i,j;
     fichier = fopen("sauvegarde.txt", "r");
+    if (fichier != NULL){
+        for(i=0;i < 4;i++){
+            for(j=0;j < 4;j++){
+                fscanf(fichier,"%c%c%c%c",chessboard[i][j],chessboard[i+1][j],chessboard[i+2][j],chessboard[i+3][j]);
+            }
+        }
+        fclose(fichier);
+    }
 }
 
 void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
