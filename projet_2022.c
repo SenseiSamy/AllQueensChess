@@ -18,7 +18,7 @@ int lire_chessboard(FILE *fichier, int chessboard[5][5]){
     if (fichier != NULL){
         for(i=0;i < 4;i++){
             for(j=0;j < 4;j++){
-                fscanf(fichier,"%c%c%c%c",chessboard[i][j],chessboard[i][j+1],chessboard[i][j+2],chessboard[i][j+3]);
+                fscanf(fichier,"%d%d%d%d",chessboard[i][j],chessboard[i][j+1],chessboard[i][j+2],chessboard[i][j+3]);
             }
         }
         fclose(fichier);
@@ -55,8 +55,8 @@ int winning(int chessboard[5][5]){
     int i,j,count_white=0,count_black=0;
     /*Vérifie si un joueur a gagné en vérifiant le plateau*/
     /*Comptage en ligne*/ 
-    for(i=0 ; i < 5 ;i++){
-        for(j=0;j < 5;j++){
+    for(i=0 ; i < 4 ;i++){
+        for(j=0;j < 4;j++){
             if(chessboard[i][j] == 1){
                 count_white += 1;
                 if(count_white == 4){
@@ -68,8 +68,8 @@ int winning(int chessboard[5][5]){
             }
         }
     }
-    for(i=0 ; i < 5 ;i++){
-        for(j=0;j < 5;j++){
+    for(i=0 ; i < 4 ;i++){
+        for(j=0;j < 4;j++){
             if(chessboard[i][j] == 2){
                 count_black += 1;
                 if(count_black == 4){
@@ -84,8 +84,8 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /*En colonne*/
-    for(i=0 ; i < 5 ;i++){
-        for(j=0;j < 5;j++){
+    for(i=0 ; i < 4 ;i++){
+        for(j=0;j < 4;j++){
             if(chessboard[j][i] == 1){
                 count_white += 1;
                 if(count_white == 4){
@@ -97,8 +97,8 @@ int winning(int chessboard[5][5]){
             }
         }
     }
-    for(i=0 ; i < 5 ;i++){
-        for(j=0;j < 5;j++){
+    for(i=0 ; i < 4 ;i++){
+        for(j=0;j < 4;j++){
             if(chessboard[j][i] == 2){
                 count_black += 1;
                 if(count_black == 4){
@@ -113,7 +113,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /*En diagonale*/
-    for(i=0,j=0; i < 5 && j < 5 ;j++,i++){
+    for(i=0,j=0; i < 4 && j < 4 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -124,7 +124,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=0,j=0; i < 5 && j < 5 ;j++,i++){
+    for(i=0,j=0; i < 4 && j < 4 ;j++,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -137,8 +137,8 @@ int winning(int chessboard[5][5]){
     }
     count_black=0;
     count_white=0;
-    /* deuxieme ligne coté gauche gauche a droite  */
-    for(i=0,j=1; i < 4 && j < 4 ;j++,i++){
+    /* deuxieme ligne haut - gauche a droite  */
+    for(i=0,j=1; j < 4 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -149,7 +149,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=0,j=1; i < 4 && j < 4 ;j++,i++){
+    for(i=0,j=1; j < 4 ;j++,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -162,8 +162,8 @@ int winning(int chessboard[5][5]){
     }
     count_black=0;
     count_white=0;
-    /* troisieme ligne coté gauche - gauche a droite  */
-    for(i=1,j=0; j < 4 ;j++,i++){
+    /* troisieme ligne bas - gauche a droite  */
+    for(i=1,j=0; i < 4 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -174,7 +174,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=1,j=0; j < 4 ;j++,i++){
+    for(i=1,j=0; i < 4 ;j++,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -188,7 +188,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* droite a gauche - diagonale principale */
-    for(i=5,j=5; i > 0 && j > 0 ;j--,i--){
+    for(i=0,j=4; j > 0 ;j--,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -199,7 +199,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=5,j=5; i > 0 && j > 0 ;j--,i--){
+    for(i=0,j=4; j > 0 ;j--,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -213,7 +213,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* droite a gauche - seconde diagonale */
-    for(i=0,j=4; i < 4 ;j--,i++){
+    for(i=0,j=3; i < 3 ;j--,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -224,7 +224,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=0,j=4; i < 4 ;j--,i++){
+    for(i=0,j=3; i < 3 ;j--,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
