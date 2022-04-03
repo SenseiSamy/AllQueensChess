@@ -18,7 +18,7 @@ int lire_chessboard(FILE *fichier, int chessboard[5][5]){
     if (fichier != NULL){
         for(i=0;i < 4;i++){
             for(j=0;j < 4;j++){
-                fscanf(fichier,"%c%c%c%c",chessboard[i][j],chessboard[i+1][j],chessboard[i+2][j],chessboard[i+3][j]);
+                fscanf(fichier,"%c%c%c%c",chessboard[i][j],chessboard[i][j+1],chessboard[i][j+2],chessboard[i][j+3]);
             }
         }
         fclose(fichier);
