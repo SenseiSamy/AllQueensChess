@@ -203,6 +203,31 @@ int winning(int chessboard[5][5]){
     }
     count_black=0;
     count_white=0;
+    /* droite a gauche - seconde diagonale */
+    for(i=0,j=4; i < 4 ;j--,i++){
+        if(chessboard[i][j] == 1){
+            count_white += 1;
+            if(count_white == 4){
+                return 1;
+            }
+        }
+        else{
+            count_white=0;
+        }
+    }
+    for(i=0,j=4; i < 4 ;j--,i++){
+        if(chessboard[i][j] == 2){
+            count_black += 1;
+            if(count_black == 4){
+                return 2;
+            }
+        }
+        else{
+            count_black=0;
+        }
+    }
+    count_black=0;
+    count_white=0;
     return 0;
 }
 
