@@ -72,6 +72,8 @@ int winning(int chessboard[5][5]){
             }
         }
     }
+    count_black=0;
+    count_white=0;
     /*En colonne*/
     for(i=0 ; i < 5 ;i++){
         for(j=0;j < 5;j++){
@@ -99,12 +101,14 @@ int winning(int chessboard[5][5]){
             }
         }
     }
+    count_black=0;
+    count_white=0;
     /*En diagonale*/
     for(i=0,j=0; i < 5 && j < 5 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
-                return 2;
+                return 1;
             }
         }
         else{
@@ -122,6 +126,58 @@ int winning(int chessboard[5][5]){
             count_black=0;
         }
     }
+    count_black=0;
+    count_white=0;
+    /* deuxieme ligne coté gauche gauche a droite  */
+    for(i=0,j=1; i < 4 && j < 4 ;j++,i++){
+        if(chessboard[i][j] == 1){
+            count_white += 1;
+            if(count_white == 4){
+                return 1;
+            }
+        }
+        else{
+            count_white=0;
+        }
+    }
+    for(i=0,j=1; i < 4 && j < 4 ;j++,i++){
+        if(chessboard[i][j] == 2){
+            count_black += 1;
+            if(count_black == 4){
+                return 2;
+            }
+        }
+        else{
+            count_black=0;
+        }
+    }
+    count_black=0;
+    count_white=0;
+    /* troisieme ligne coté gauche - gauche a droite  */
+    for(i=1,j=0; j < 4 ;j++,i++){
+        if(chessboard[i][j] == 1){
+            count_white += 1;
+            if(count_white == 4){
+                return 1;
+            }
+        }
+        else{
+            count_white=0;
+        }
+    }
+    for(i=1,j=0; j < 4 ;j++,i++){
+        if(chessboard[i][j] == 2){
+            count_black += 1;
+            if(count_black == 4){
+                return 2;
+            }
+        }
+        else{
+            count_black=0;
+        }
+    }
+    count_black=0;
+    count_white=0;
     return 0;
 }
 
