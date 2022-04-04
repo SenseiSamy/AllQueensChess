@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include <time.h>
+#include<time.h>
 
 typedef struct position
 {   
@@ -41,7 +41,7 @@ void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
 int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
     /*Vérifie si un mouvement d'un reine est possible, renvoie 0 si le déplacement est possible, renvoie 1 sinon*/
     if (chessboard[fin.y][fin.x] == 0) /*Vérifie que la position d'arrivée est libre*/
-    {
+    {   
         if (orig.x == fin.x || orig.y == fin.y) /*Vérifie les mouvements rectilignes*/
             return 0;
         if (abs(fin.x - orig.x) == abs(fin.y - orig.y)) /*Vérifie les mouvements diagonaux*/
@@ -52,7 +52,7 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
 
 int winning(int chessboard[5][5]){
     int i,j,count_white=0,count_black=0;
-    /*Vérifie si un joueur a gagné en vérifiant le plateau*/
+    /*Vérifie si un num_joueur a gagné en vérifiant le plateau*/
     /*Comptage en ligne*/ 
     for(i=0 ; i < 4 ;i++){
         for(j=0;j < 4;j++){
@@ -334,9 +334,79 @@ Position *coord_to_pos(char coord[2]){
     return pos;
 }
 
-void deplacer_reine(Position orig, Position fin, int chessboard[5][5]){
-    chessboard[fin.y][fin.x] = chessboard[orig.y][orig.x];
-    chessboard[orig.y][orig.x] = 0;
+void deplacer_reine(int chessboard[5][5], int joueur){
+    char coord_orig[2], coord_fin[2];
+    int num_joueur = joueur;
+    Position pos_orig, pos_fin;
+    printf("Quel pion voulez vous déplacer (ex : A2) : ");
+    scanf("%s", coord_orig);
+    pos_orig = *coord_to_pos(coord_orig);
+    printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
+    printf("%d  %d", chessboard[pos_orig.y][pos_orig.x], num_joueur);
+    while (chessboard[pos_orig.y][pos_orig.x] != num_joueur)
+    {
+        afficher_chessboard(chessboard);
+        printf("Veuillez indiquer une case avec un pion vous appartenant\n");
+        printf("Quel pion voulez vous déplacer (ex : A2) : ");
+        scanf("%s", coord_orig);
+        pos_orig = *coord_to_pos(coord_orig);
+    }
+    afficher_chessboard(chessboard);
+    printf("Ou voulez vous le déplacer (ex : A2) : ");
+    scanf("%s", coord_fin);
+    pos_fin = *coord_to_pos(coord_fin);
+    printf("%d",sans_conflit(pos_orig, pos_fin, chessboard));
+    while (sans_conflit(pos_orig, pos_fin, chessboard) != 0)
+    {
+        afficher_chessboard(chessboard);
+        printf("Le déplacement est impossible, veuillez reessayer\n");
+        printf("Ou voulez vous le déplacer (ex : A2) : ");
+        scanf("%s", coord_orig);
+        pos_orig = *coord_to_pos(coord_orig);
+    }
+    chessboard[pos_fin.y][pos_fin.x] = chessboard[pos_orig.y][pos_orig.x];
+    chessboard[pos_orig.y][pos_orig.x] = 0;
+}
+
+void choix_utilisateur(int chessboard[5][5]){
+    int choix;
+    printf("Que doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
+    scanf("%d", &choix);
+    while (choix != 1 & choix != 2 & choix != 3){
+       afficher_chessboard(chessboard);
+       printf("Veuillez entrer 1, 2 ou 3\n");
+       printf("Que doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
+       scanf("%d", &choix);
+    }
+    if (choix == 1){
+        afficher_chessboard(chessboard);
+        deplacer_reine(chessboard, 1);
+    }else if (choix == 2){
+        printf("Le num_joueur 2 a gagné !");
+        exit(1);
+    }else{
+        ecrire_chessboard(chessboard, NULL);
+        exit(1);
+    }
+    afficher_chessboard(chessboard);
+    printf("Que doit faire le joueur 2 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
+    scanf("%d", &choix);
+    while (choix != 1 & choix != 2 & choix != 3){
+       afficher_chessboard(chessboard);
+       printf("Veuillez entrer 1, 2 ou 3\n");
+       printf("Que doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
+       scanf("%d", &choix);
+    }
+    if (choix == 1){
+        afficher_chessboard(chessboard);
+        deplacer_reine(chessboard, 2);
+    }else if (choix == 2){
+        printf("Le num_joueur 1 a gagné !");
+        exit(1);
+    }else{
+        ecrire_chessboard(chessboard, NULL);
+        exit(1);
+    }
 }
 
 int main(void){
@@ -345,11 +415,12 @@ int main(void){
     while (winning(chessboard) == 0) /*Boucle principale du programme*/
     {
         afficher_chessboard(chessboard);
+        choix_utilisateur(chessboard);
     }
     if (winning(chessboard) == 1){
-        printf("Le joueur 1 a gagné !");
+        printf("Le num_joueur 1 a gagné !");
     } else{
-        printf("Le joueur 2 a gagné !");
+        printf("Le num_joueur 2 a gagné !");
     }
     return 0;
 }
