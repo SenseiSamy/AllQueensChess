@@ -17,7 +17,7 @@ int lire_chessboard(FILE *fichier, int chessboard[5][5]){
     if (fichier != NULL){
         for(int i=0;i < 4;i++){
             /* lit le fichier et mets les valeurs dans le tableau  */
-            fscanf(fichier,"%d%d%d%d\n",chessboard[i][0],chessboard[i][1],chessboard[i][2],chessboard[i][3],chessboard[i][4]);
+            fscanf(fichier,"%d%d%d%d%d\n",&chessboard[i][0],&chessboard[i][1],&chessboard[i][2],&chessboard[i][3],&chessboard[i][4]);
         }
         fclose(fichier);
     }
@@ -31,7 +31,7 @@ void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
     {
         for (int i = 0; i < 5; i++)
         {
-            fprintf(fichier, "%d,%d,%d,%d,%d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2],chessboard[i][3],chessboard[i][4]);
+            fprintf(fichier, "%d%d%d%d%d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2],chessboard[i][3],chessboard[i][4]);
         }
         fclose(fichier);
     }
@@ -277,10 +277,10 @@ void afficher_chessboard(int chessboard[5][5]){
             switch (chessboard[i][y])
             {
                 case 1:
-                    printf(" N |");
+                    printf("\033[0;30m N \033[0m|");
                     break;
                 case 2:
-                    printf(" R |");
+                    printf("\033[0;31m R \033[0m|");
                     break;
                 default:
                     printf("   |");
@@ -344,7 +344,7 @@ int main(void){
     int chessboard[5][5] = {{1,2,1,2,1}, {0,0,0,0,0}, {2,0,0,0,1}, {0,0,0,0,0}, {2,1,2,1,2}};
     while (winning(chessboard) == 0) /*Boucle principale du programme*/
     {
-        afficher_chessboard(chessboard[5][5]);
+        afficher_chessboard(chessboard);
     }
     if (winning(chessboard) == 1){
         printf("Le joueur 1 a gagné !");
