@@ -140,8 +140,6 @@ int winning(int chessboard[5][5]){
     for(i=0,j=1; j <= 4 && i <= 3 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
-            printf("i = %d , j = %d\n",i,j);
-            printf("count white = %d\n",count_white);
             if(count_white == 4){
                 return 1;
             }
@@ -153,8 +151,6 @@ int winning(int chessboard[5][5]){
     for(i=0,j=1; j <= 4 ;j++,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
-          printf("i = %d , j = %d\n",i,j);
-          printf("count dark = %d\n",count_black);
             if(count_black == 4){
                 return 2;
             }
