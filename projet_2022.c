@@ -42,8 +42,30 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]){
     /*Vérifie si un mouvement d'un reine est possible, renvoie 0 si le déplacement est possible, renvoie 1 sinon*/
     if (chessboard[fin.y][fin.x] == 0) /*Vérifie que la position d'arrivée est libre*/
     {   
-        if (orig.x == fin.x || orig.y == fin.y) /*Vérifie les mouvements rectilignes*/
-            return 0;
+        if (orig.x == fin.x || orig.y == fin.y){/*Vérifie les mouvements rectilignes*/
+            if(orig.x == fin.x){
+                for(int i = 0 ; i < (orig.x - fin.x) ; i++){
+                    int count=0;
+                    if(chessboard[orig.x][i] == 0){
+                        count += 1;
+                        if(count == (orig.x - fin.x) ){
+                            return 0;
+                        }
+                    }
+                }
+            }
+            if(orig.y == fin.y){
+                for(int i = 0 ; i < (orig.y - fin.y) ; i++){
+                    int count=0;
+                    if(chessboard[i][orig.y] == 0){
+                        count += 1;
+                        if(count == (orig.y - fin.y) ){
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
         if (abs(fin.x - orig.x) == abs(fin.y - orig.y)) /*Vérifie les mouvements diagonaux*/
             return 0;
     }
