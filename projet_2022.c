@@ -137,9 +137,11 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* deuxieme ligne haut - gauche a droite  */
-    for(i=0,j=1; j < 4 ;j++,i++){
+    for(i=0,j=1; j <= 4 && i <= 3 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
+            printf("i = %d , j = %d\n",i,j);
+            printf("count white = %d\n",count_white);
             if(count_white == 4){
                 return 1;
             }
@@ -148,9 +150,11 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=0,j=1; j < 4 ;j++,i++){
+    for(i=0,j=1; j <= 4 ;j++,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
+          printf("i = %d , j = %d\n",i,j);
+          printf("count dark = %d\n",count_black);
             if(count_black == 4){
                 return 2;
             }
@@ -162,7 +166,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* troisieme ligne bas - gauche a droite  */
-    for(i=1,j=0; i < 4 ;j++,i++){
+    for(i=1,j=0; i <= 4 ;j++,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -173,7 +177,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=1,j=0; i < 4 ;j++,i++){
+    for(i=1,j=0; i <= 4 ;j++,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -187,7 +191,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* droite a gauche - diagonale principale */
-    for(i=0,j=4; j > 0 ;j--,i++){
+    for(i=0,j=4; j >= 0 ;j--,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -198,7 +202,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=0,j=4; j > 0 ;j--,i++){
+    for(i=0,j=4; j >= 0 ;j--,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -212,7 +216,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* droite a gauche - seconde diagonale */
-    for(i=0,j=3; i < 3 ;j--,i++){
+    for(i=0,j=3; i <= 3 ;j--,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -223,7 +227,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=0,j=3; i < 3 ;j--,i++){
+    for(i=0,j=3; i <= 3 ;j--,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -237,7 +241,7 @@ int winning(int chessboard[5][5]){
     count_black=0;
     count_white=0;
     /* droite a gauche - troisième diagonale */
-    for(i=1,j=4; i < 4 ;j--,i++){
+    for(i=1,j=4; i <= 4 ;j--,i++){
         if(chessboard[i][j] == 1){
             count_white += 1;
             if(count_white == 4){
@@ -248,7 +252,7 @@ int winning(int chessboard[5][5]){
             count_white=0;
         }
     }
-    for(i=1,j=4; i < 4 ;j--,i++){
+    for(i=1,j=4; i <= 4 ;j--,i++){
         if(chessboard[i][j] == 2){
             count_black += 1;
             if(count_black == 4){
@@ -266,7 +270,7 @@ int winning(int chessboard[5][5]){
 
 void afficher_chessboard(int chessboard[5][5]){
     /*Affiche le chessboard dans le terminal*/
-    printf("\e[1;1H\e[2J"); /*Clear le terminal*/
+    //printf("\e[1;1H\e[2J"); /*Clear le terminal*/
     printf("    A   B   C   D   E\n");
     printf("  ---------------------\n");
     for (int i = 0; i < 5; i++)
@@ -342,7 +346,7 @@ void deplacer_reine(int chessboard[5][5], int joueur){
     scanf("%s", coord_orig);
     pos_orig = *coord_to_pos(coord_orig);
     printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
-    printf("%d  %d", chessboard[pos_orig.y][pos_orig.x], num_joueur);
+    printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
     while (chessboard[pos_orig.y][pos_orig.x] != num_joueur)
     {
         afficher_chessboard(chessboard);
@@ -372,7 +376,7 @@ void choix_utilisateur(int chessboard[5][5]){
     int choix;
     printf("Que doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
     scanf("%d", &choix);
-    while (choix != 1 & choix != 2 & choix != 3){
+    while (choix != 1 && choix != 2 && choix != 3){
        afficher_chessboard(chessboard);
        printf("Veuillez entrer 1, 2 ou 3\n");
        printf("Que doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
@@ -388,10 +392,11 @@ void choix_utilisateur(int chessboard[5][5]){
         ecrire_chessboard(chessboard, NULL);
         exit(1);
     }
+    /*Tour du Joueur 2*/
     afficher_chessboard(chessboard);
     printf("Que doit faire le joueur 2 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
     scanf("%d", &choix);
-    while (choix != 1 & choix != 2 & choix != 3){
+    while (choix != 1 && choix != 2 && choix != 3){
        afficher_chessboard(chessboard);
        printf("Veuillez entrer 1, 2 ou 3\n");
        printf("Que doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
@@ -410,7 +415,6 @@ void choix_utilisateur(int chessboard[5][5]){
 }
 
 int main(void){
-    FILE *fichier = NULL;
     int chessboard[5][5] = {{1,2,1,2,1}, {0,0,0,0,0}, {2,0,0,0,1}, {0,0,0,0,0}, {2,1,2,1,2}};
     while (winning(chessboard) == 0) /*Boucle principale du programme*/
     {
@@ -418,8 +422,10 @@ int main(void){
         choix_utilisateur(chessboard);
     }
     if (winning(chessboard) == 1){
+        afficher_chessboard(chessboard);
         printf("Le num_joueur 1 a gagné !");
     } else{
+        afficher_chessboard(chessboard);
         printf("Le num_joueur 2 a gagné !");
     }
     return 0;
