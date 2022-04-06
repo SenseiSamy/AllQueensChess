@@ -21,7 +21,7 @@ int lire_chessboard(FILE *fichier, int chessboard[5][5]){
         }
         fclose(fichier);
     }
-    return 0;
+    return chessboard;
 }
 
 void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
