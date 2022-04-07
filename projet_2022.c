@@ -426,8 +426,6 @@ void deplacer_reine(int chessboard[5][5], int joueur){
     printf("Quel pion voulez vous déplacer (ex : A2) : ");
     scanf("%s", coord_orig);
     pos_orig = *coord_to_pos(coord_orig);
-    printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
-    printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
     while (chessboard[pos_orig.y][pos_orig.x] != num_joueur)
     {
         afficher_chessboard(chessboard);
@@ -440,7 +438,6 @@ void deplacer_reine(int chessboard[5][5], int joueur){
     printf("Ou voulez vous le déplacer (ex : A2) : ");
     scanf("%s", coord_fin);
     pos_fin = *coord_to_pos(coord_fin);
-    printf("%d",sans_conflit(pos_orig, pos_fin, chessboard));
     while (sans_conflit(pos_orig, pos_fin, chessboard) != 0)
     {
         afficher_chessboard(chessboard);
