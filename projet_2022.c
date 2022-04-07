@@ -11,8 +11,8 @@ typedef struct position
 
 
 /*-- Fonction de sauvegardes --*/
-int lire_chessboard(FILE *fichier, int chessboard[5][5]){
-    /*Lit un fichier stockant le chessboard et renvoie un Array2D décrivant les valeurs des cellules de la grille*/
+void lire_chessboard(FILE *fichier, int chessboard[5][5]){
+    /*Lit un fichier stockant le chessboard et rempli un tableau décrivant le plateau*/
     fichier = fopen("sauvegarde.txt", "r");
     if (fichier != NULL){
         for(int i=0;i < 4;i++){
@@ -21,7 +21,6 @@ int lire_chessboard(FILE *fichier, int chessboard[5][5]){
         }
         fclose(fichier);
     }
-    return chessboard;
 }
 
 void ecrire_chessboard(int chessboard[5][5], FILE *fichier){
@@ -352,7 +351,7 @@ int winning(int chessboard[5][5]){
 
 void afficher_chessboard(int chessboard[5][5]){
     /*Affiche le chessboard dans le terminal*/
-    //printf("\e[1;1H\e[2J"); /*Clear le terminal*/
+    printf("\e[1;1H\e[2J"); /*Clear le terminal*/
     printf("    A   B   C   D   E\n");
     printf("  ---------------------\n");
     for (int i = 0; i < 5; i++)
@@ -498,6 +497,14 @@ void choix_utilisateur(int chessboard[5][5]){
 
 int main(void){
     int chessboard[5][5] = {{1,2,1,2,1}, {0,0,0,0,0}, {2,0,0,0,1}, {0,0,0,0,0}, {2,1,2,1,2}};
+    int choix;
+    printf("\e[1;1H\e[2J");
+    do {
+        printf("Que voulez vous faire :\n1 - Nouvelle partie\n2 - Reprendre une partie\n");
+        scanf("%d", &choix);
+    } while(choix != 1 & choix != 2);
+    if (choix == 2)
+        lire_chessboard(NULL, chessboard);
     while (winning(chessboard) == 0) /*Boucle principale du programme*/
     {
         afficher_chessboard(chessboard);
