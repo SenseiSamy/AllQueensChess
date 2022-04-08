@@ -518,11 +518,11 @@ int main(void){
                             {0,0,0,0,0}, 
                             {2,1,2,1,2}};
     int choix;
-    printf("\e[1;1H\e[2J");
+    printf("\033[H\033[2J\033[3J");
     do {
         printf("Que voulez vous faire :\n1 - Nouvelle partie\n2 - Reprendre une partie\n");
         scanf("%d", &choix);
-    } while(choix != 1 & choix != 2);
+    } while(choix != 1 && choix != 2);
     if (choix == 2)
         lire_chessboard(NULL, chessboard);
     while (winning(chessboard) == 0) /*Boucle principale du programme*/
