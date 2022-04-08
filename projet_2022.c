@@ -452,7 +452,7 @@ Position* coord_to_pos(char coord[2]) {
 }
 
 void deplacer_reine(int chessboard[5][5], int joueur) {
-    char coord_orig[2], coord_fin[2];
+    char coord_orig[3], coord_fin[3];
     int num_joueur = joueur;
     Position pos_orig, pos_fin;
 deplacer_pion:
