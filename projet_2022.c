@@ -386,7 +386,7 @@ int winning(int chessboard[5][5]) {
 
 void afficher_chessboard(int chessboard[5][5]) {
     /*Affiche le chessboard dans le terminal*/
-    //printf("\033[1;1H\033[2J"); /*Clear le terminal*/
+    printf("\033[1;1H\033[2J"); /*Clear le terminal*/
     printf("    A   B   C   D   E\n");
     printf("  ---------------------\n");
     for (int i = 0; i < 5; i++)
@@ -507,7 +507,7 @@ joueur1:
             deplacer_reine(chessboard, 1);
         }
         else if (choix == 2) {
-            printf("Le num_joueur 2 a gagné !");
+            printf("Le joueur 2 a gagné !");
             exit(1);
         }
         else {
@@ -518,9 +518,9 @@ joueur1:
     /*Tour du Joueur 2*/
     afficher_chessboard(chessboard);
 joueur2:
-    printf("Que doit faire le joueur 2[Rouge] ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
+    printf("Que doit faire le joueur 2[Rouge] ? | 1-Jouer | 2-Abandonner\n");
     scanf("%d", &choix);
-    if (choix != 1 && choix != 2 && choix != 3) {
+    if (choix != 1 && choix != 2) {
         afficher_chessboard(chessboard);
         printf("Veuillez entrer 1, 2 ou 3\n");
         goto joueur2;
@@ -530,12 +530,8 @@ joueur2:
             afficher_chessboard(chessboard);
             deplacer_reine(chessboard, 2);
         }
-        else if (choix == 2) {
-            printf("Le num_joueur 1 a gagné !");
-            exit(1);
-        }
-        else {
-            ecrire_chessboard(chessboard, NULL);
+        else{
+            printf("Le joueur 1 a gagné !");
             exit(1);
         }
     }
