@@ -62,8 +62,11 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
                 }
                 if ((orig.y - fin.y) >= 0) { /* Vertical bas en haut */
                     for (int i = fin.y; i <= orig.y; i++) {
+                        printf("Vertical bas en haut\n");
                         if (chessboard[orig.x][i] == 0) {
                             count += 1;
+                            printf("count = %d\n", count);
+                            printf("resultat = %d\n", abs(orig.y - fin.y));
                             if (count == abs(orig.y - fin.y)) {
                                 return 0;
                             }
@@ -73,22 +76,30 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
             }
             count = 0;
             if (orig.y == fin.y) {
-                if ((orig.x - fin.x) < 0) {
+                if ((orig.x - fin.x) < 0) { /* Horizontal gauche a droite */
                     printf("Horizontal gauche a droite\n");
                     for (int i = orig.x; i <= fin.x; i++) {
                         if (chessboard[i][orig.y] == 0) {
+                            printf("i = %d y= %d\n",i,orig.y);
+                            printf("Valeur de tab = %d\n", chessboard[i][orig.y]);
                             count += 1;
+                            printf("count = %d\n", count);
+                            printf("resultat = %d\n", abs(orig.x - fin.x));
                             if (count == abs(orig.x - fin.x)) {
                                 return 0;
                             }
                         }
                     }
                 }
-                if ((orig.x - fin.x) >= 0) {
+                if ((orig.x - fin.x) >= 0) { /* Horizontal droite a gauche */
                     printf("Horizontal droite a gauche\n");
                     for (int i = fin.x; i <= orig.x; i++) {
                         if (chessboard[i][orig.y] == 0) {
+                            printf("i = %d y= %d\n", i, orig.y);
+                            printf("Valeur de tab = %d\n", chessboard[i][orig.y]);
                             count += 1;
+                            printf("count = %d\n", count);
+                            printf("resultat = %d\n", abs(orig.x - fin.x));
                             if (count == abs(orig.x - fin.x)) {
                                 return 0;
                             }
@@ -100,7 +111,7 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
         /*Vérifie les mouvements diagonaux*/
         if (abs(orig.x - fin.x) == abs(orig.y - fin.y)) {
             int count = 0;
-            if ( (orig.x - fin.x) >= 0 && (orig.y - fin.y) < 0) { /* Haut en Bas - Gauche a Droite */
+            if ((orig.x - fin.x) >= 0 && (orig.y - fin.y) < 0) { /* Haut en Bas - Gauche a Droite */
                 for (int i = fin.x; i <= orig.x; i++) {
                     for (int y = orig.y; y <= fin.y; y++) {
                         if (chessboard[i][y] == 0) {
@@ -114,9 +125,9 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
             }
             count = 0;
             if ((orig.x - fin.x) < 0 && (orig.y - fin.y) < 0) { /* Haut en Bas - Droite a Gauche */
-                for (int i = orig.x; i <= fin.x ;i++) {
-                    for (int y= orig.y; y <= fin.y ;y++) {
-                        if (chessboard[i][y]==0) {
+                for (int i = orig.x; i <= fin.x; i++) {
+                    for (int y = orig.y; y <= fin.y; y++) {
+                        if (chessboard[i][y] == 0) {
                             count += 1;
                             if (count == abs(orig.x - fin.x)) {
                                 return 0;
@@ -127,10 +138,10 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
             }
             count = 0;
             if ((orig.x - fin.x) < 0 && (orig.y - fin.y) >= 0) { /* Bas en Haut - Gauche a Droite */
-                printf("Bas en Haut - Gauche a Droite");
-                for (int i = orig.x; i <= fin.x ; i++) {
-                    for (int y = fin.y; y <= orig.y ; y++) {
-                        if (chessboard[i][y]== 0) {
+                //printf("Bas en Haut - Gauche a Droite");
+                for (int i = orig.x; i <= fin.x; i++) {
+                    for (int y = fin.y; y <= orig.y; y++) {
+                        if (chessboard[i][y] == 0) {
                             count += 1;
                             if (count == abs(orig.x - fin.x)) {
                                 return 0;
@@ -141,10 +152,10 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
             }
             count = 0;
             if ((orig.x - fin.x) >= 0 && (orig.y - fin.y) >= 0) { /* Haut en Bas - Droite a Gauche */
-                printf("Bas en Haut - Droite a Gauche");
-                for (int i = fin.x ; i <= orig.x ; i++) {
-                    for (int y = fin.y ; y <= orig.y; y++) {
-                        if (chessboard[i][y]==0) {
+                //printf("Bas en Haut - Droite a Gauche");
+                for (int i = fin.x; i <= orig.x; i++) {
+                    for (int y = fin.y; y <= orig.y; y++) {
+                        if (chessboard[i][y] == 0) {
                             count += 1;
                             if (count == abs(orig.x - fin.x)) {
                                 return 0;
@@ -375,7 +386,7 @@ int winning(int chessboard[5][5]) {
 
 void afficher_chessboard(int chessboard[5][5]) {
     /*Affiche le chessboard dans le terminal*/
-    printf("\033[1;1H\033[2J"); /*Clear le terminal*/
+    //printf("\033[1;1H\033[2J"); /*Clear le terminal*/
     printf("    A   B   C   D   E\n");
     printf("  ---------------------\n");
     for (int i = 0; i < 5; i++)
@@ -449,10 +460,10 @@ void deplacer_reine(int chessboard[5][5], int joueur) {
     Position pos_orig, pos_fin;
 deplacer_pion:
     printf("Quel pion voulez vous déplacer (ex : A2) : ");
-    scanf("%s", coord_orig);
+    scanf("%s",coord_orig);
     pos_orig = *coord_to_pos(coord_orig);
-    printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
-    printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
+    //printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
+    //printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
     if (chessboard[pos_orig.y][pos_orig.x] != num_joueur)
     {
         afficher_chessboard(chessboard);
@@ -465,8 +476,8 @@ deplacer_pion:
         printf("Ou voulez vous le déplacer (ex : A2) : ");
         scanf("%s", coord_fin);
         pos_fin = *coord_to_pos(coord_fin);
-        printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
-        printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
+        //printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
+        //printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
         if (sans_conflit(pos_orig, pos_fin, chessboard) != 0)
         {
             afficher_chessboard(chessboard);
@@ -537,7 +548,7 @@ int main(void) {
                             {0,0,0,0,0},
                             {2,1,2,1,2} };
     int choix;
-    printf("\033[1;1H\033[2J");
+    //printf("\033[1;1H\033[2J");
     do {
         printf("Que voulez vous faire :\n1 - Nouvelle partie\n2 - Reprendre une partie\n");
         scanf("%d", &choix);
