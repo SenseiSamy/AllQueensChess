@@ -80,7 +80,7 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
                     printf("Horizontal gauche a droite\n");
                     for (int i = orig.x; i <= fin.x; i++) {
                         if (chessboard[i][orig.y] == 0) {
-                            printf("i = %d y= %d\n",i,orig.y);
+                            printf("i = %d y= %d\n", i, orig.y);
                             printf("Valeur de tab = %d\n", chessboard[i][orig.y]);
                             count += 1;
                             printf("count = %d\n", count);
@@ -414,7 +414,7 @@ void afficher_chessboard(int chessboard[5][5]) {
 
 Position* coord_to_pos(char coord[2]) {
     /*Converti une coordonnée de la grille en structure position (ex: A3 -> pos.x = 0, pos.y = 2)*/
-    Position* pos = malloc(sizeof(Position));
+    Position* pos = malloc(sizeof(char));
     switch (coord[0])
     {
     case 'A':
@@ -452,6 +452,7 @@ Position* coord_to_pos(char coord[2]) {
         break;
     }
     return pos;
+    free(pos); 
 }
 
 void deplacer_reine(int chessboard[5][5], int joueur) {
@@ -460,7 +461,7 @@ void deplacer_reine(int chessboard[5][5], int joueur) {
     Position pos_orig, pos_fin;
 deplacer_pion:
     printf("Quel pion voulez vous déplacer (ex : A2) : ");
-    scanf("%s",coord_orig);
+    scanf("%s", coord_orig);
     pos_orig = *coord_to_pos(coord_orig);
     //printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
     //printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
@@ -530,7 +531,7 @@ joueur2:
             afficher_chessboard(chessboard);
             deplacer_reine(chessboard, 2);
         }
-        else{
+        else {
             printf("Le joueur 1 a gagné !");
             exit(1);
         }
