@@ -30,6 +30,7 @@ void ecrire_chessboard(int chessboard[5][5], FILE* fichier) {
     {
         for (int i = 0; i < 5; i++)
         {
+            /* enregistre le tabledau dans le fichier "sauvegarde.txt"  */
             fprintf(fichier, "%d %d %d %d %d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2], chessboard[i][3], chessboard[i][4]);
         }
         fclose(fichier);
@@ -143,7 +144,7 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
 
 int winning(int chessboard[5][5]) {
     int i, j, count_white = 0, count_black = 0;
-    /*Vérifie si un num_joueur a gagné en vérifiant le plateau*/
+    /*Vérifie si un joueur a gagné en vérifiant le plateau*/
     /*En diagonale*/
     for (i = 0, j = 0; i < 4 && j < 4; j++, i++) {
         if (chessboard[i][j] == 1) {
@@ -382,7 +383,7 @@ void afficher_chessboard(int chessboard[5][5]) {
 Position* coord_to_pos(char coord[2]) {
     /*Converti une coordonnée de la grille en structure position (ex: A3 -> pos.x = 0, pos.y = 2)*/
     Position* pos = malloc(sizeof(char));
-    switch (coord[0])
+    switch (coord[0]) /* regarde le premier charactère */
     {
     case 'A':
         pos->x = 0;
@@ -400,7 +401,7 @@ Position* coord_to_pos(char coord[2]) {
         pos->x = 4;
         break;
     }
-    switch (coord[1])
+    switch (coord[1]) /* regarde le second charactère pour convertire*/
     {
     case '1':
         pos->y = 0;
@@ -467,6 +468,7 @@ deplacer_pion:
 }
 
 void choix_utilisateur(int chessboard[5][5]) {
+    /*Demande à l'utilisateur sont choix*/
     int choix;
 joueur1:
     printf("\033[0;34m[Noir]\033[0mQue doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder \033[0m\n");
@@ -530,7 +532,7 @@ int main(void) {
         afficher_chessboard(chessboard);
         choix_utilisateur(chessboard);
     }
-    if (winning(chessboard) == 1) {
+    if (winning(chessboard) == 1) { /* Vérification qui a gagné */
         afficher_chessboard(chessboard);
         printf("\033[1;37mLe Joueur Noir a gagné !");
     }
