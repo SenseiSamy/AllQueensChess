@@ -521,7 +521,7 @@ int main(void) {
                             {0,0,0,0,0},
                             {2,1,2,1,2} };
     int choix=0;
-    do {
+    do { /* Premier choix au début du lancement du prog */
         printf("\033[4;37mQue voulez vous faire :\033[0m\n 1 - Nouvelle partie\n 2 - Reprendre une partie\n");
         scanf("%d", &choix);
     } while (choix != 1 && choix != 2);
