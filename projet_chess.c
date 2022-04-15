@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include <windows.h>
 typedef struct position
 {
     int x;
@@ -427,38 +428,35 @@ void deplacer_reine(int chessboard[5][5], int joueur) {
     Position pos_orig, pos_fin;
 deplacer_pion:
     if (joueur == 2) {
-        printf("\033[0;31m[Rouge]\033[0mQuel pion voulez vous déplacer (ex : A2) : ");
+        printf("\033[0;31m[Rouge]\033[0mQuel pion voulez vous deplacer (ex : A2) : ");
     }
     else {
-        printf("\033[0;34m[Noir]\033[0mQuel pion voulez vous déplacer (ex : A2) : ");
+        printf("\033[0;34m[Noir]\033[0mQuel pion voulez vous deplacer (ex : A2) : ");
     }
     scanf("%s", coord_orig);
     pos_orig = *coord_to_pos(coord_orig);
-    //printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
-    //printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
     if (chessboard[pos_orig.y][pos_orig.x] != num_joueur)
     {
         afficher_chessboard(chessboard);
-        printf("Veuillez indiquer une case avec un pion vous appartenant\n");
+        printf("\033[0;41m\033[1;36m /!\\ Veuillez indiquer une case avec un pion vous appartenant /!\\ \033[0m\n");
         goto deplacer_pion;
     }
     else {
     emplacement_pion:
         afficher_chessboard(chessboard);
         if (joueur == 2) {
-            printf("\033[0;31m[Rouge]\033[0mOu voulez vous le déplacer (ex : A2) : ");
+            printf("\033[0;31m[Rouge]\033[0mOu voulez vous le deplacer (ex : A2) : \033[0m");
         }
         else {
-            printf("\033[0;34m[Noir]\033[0mOu voulez vous le déplacer (ex : A2) : ");
+            printf("\033[0;34m[Noir]\033[0mOu voulez vous le deplacer (ex : A2) : \033[0m");
         }
         scanf("%s", coord_fin);
         pos_fin = *coord_to_pos(coord_fin);
-        //printf("x = %d  y = %d\n", pos_orig.x, pos_orig.y);
-        //printf("value emplacement = %d  joueur = %d\n", chessboard[pos_orig.y][pos_orig.x], num_joueur);
         if (sans_conflit(pos_orig, pos_fin, chessboard) != 0)
         {
             afficher_chessboard(chessboard);
-            printf("Le déplacement est impossible, veuillez reessayer\n");
+            printf("\033[0;41m\033[1;37m Le deplacement est impossible, veuillez reessayer \033[0m\n");
+            Sleep(3000);
             goto emplacement_pion;
         }
         else {
@@ -471,11 +469,11 @@ deplacer_pion:
 void choix_utilisateur(int chessboard[5][5]) {
     int choix;
 joueur1:
-    printf("\033[0;34m[Noir]\033[0mQue doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder\n");
+    printf("\033[0;34m[Noir]\033[0mQue doit faire le joueur 1 ? | 1-Jouer | 2-Abandonner | 3-Sauvegarder \033[0m\n");
     scanf("%d", &choix);
     if (choix != 1 && choix != 2 && choix != 3) {
         afficher_chessboard(chessboard);
-        printf("Veuillez entrer 1, 2 ou 3\n");
+        printf("\033[0;41m\033[1;37m Veuillez entrer 1, 2 ou 3 \033[0m\n");
         goto joueur1;
     }
     else {
@@ -495,11 +493,11 @@ joueur1:
     /*Tour du Joueur 2*/
     afficher_chessboard(chessboard);
 joueur2:
-    printf("\033[0;31m[Rouge]\033[0mQue doit faire le joueur 2 ? | 1-Jouer | 2-Abandonner\n");
+    printf("\033[0;31m[Rouge]\033[0mQue doit faire le joueur 2 ? | 1-Jouer | 2-Abandonner\033[0m\n");
     scanf("%d", &choix);
     if (choix != 1 && choix != 2) {
         afficher_chessboard(chessboard);
-        printf("Veuillez entrer 1, 2 ou 3\n");
+        printf("\033[0;41m\033[1;37m Veuillez entrer 1, 2 ou 3 \033[0m\n");
         goto joueur2;
     }
     else {
