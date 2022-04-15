@@ -354,11 +354,11 @@ int winning(int chessboard[5][5]) {
 void afficher_chessboard(int chessboard[5][5]) {
     /*Affiche le chessboard dans le terminal*/
     printf("\033[1;1H\033[2J"); /*Clear le terminal*/
-    printf("    A   B   C   D   E\n");
-    printf("  ---------------------\n");
+    printf("     A   B   C   D   E\n");
+    printf("   ---------------------\n");
     for (int i = 0; i < 5; i++)
     {
-        printf("%d |", i + 1);
+        printf(" %d |", i + 1);
         for (int y = 0; y < 5; y++)
         {
             switch (chessboard[i][y])
@@ -375,7 +375,7 @@ void afficher_chessboard(int chessboard[5][5]) {
             }
         }
         printf("\n");
-        printf("  ---------------------\n");
+        printf("   ---------------------\033[0m\n");
     }
 }
 
