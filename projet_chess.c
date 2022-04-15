@@ -515,11 +515,11 @@ joueur2:
 }
 
 int main(void) {
-    /*int chessboard[5][5] = {{1,2,1,2,1},
+    int chessboard[5][5] = {{1,2,1,2,1},
                             {0,0,0,0,0},
                             {2,0,0,0,1},
                             {0,0,0,0,0},
-                            {2,1,2,1,2} };*/
+                            {2,1,2,1,2} };
     int chessboard[5][5];
     int choix;
     do {
