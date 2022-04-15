@@ -69,7 +69,7 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
             else
                 y--;
             while ((x != fin.x) && (y != fin.y)){ /*si oui, vérifie qu'il n'y a pas de reine genant le mouvement*/
-                if (chessboard[y][x] != 0){
+                 if (chessboard[y][x] != 0){
                     return 1; /*retourne 1 si le mouvement est gené*/ 
                 }
                 if (x < fin.x)
@@ -90,64 +90,6 @@ int sans_conflit(Position orig, Position fin, int chessboard[5][5]) {
 int winning(int chessboard[5][5]) {
     int i, j, count_white = 0, count_black = 0;
     /*Vérifie si un num_joueur a gagné en vérifiant le plateau*/
-    /*Comptage en ligne*/
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            if (chessboard[i][j] == 1) {
-                count_white += 1;
-                if (count_white == 4) {
-                    return 1;
-                }
-            }
-            else {
-                count_white = 0;
-            }
-        }
-    }
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            if (chessboard[i][j] == 2) {
-                count_black += 1;
-                if (count_black == 4) {
-                    return 2;
-                }
-            }
-            else {
-                count_black = 0;
-            }
-        }
-    }
-    count_black = 0;
-    count_white = 0;
-    /*En colonne*/
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            if (chessboard[j][i] == 1) {
-                count_white += 1;
-                if (count_white == 4) {
-                    return 1;
-                }
-            }
-            else {
-                count_white = 0;
-            }
-        }
-    }
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            if (chessboard[j][i] == 2) {
-                count_black += 1;
-                if (count_black == 4) {
-                    return 2;
-                }
-            }
-            else {
-                count_black = 0;
-            }
-        }
-    }
-    count_black = 0;
-    count_white = 0;
     /*En diagonale*/
     for (i = 0, j = 0; i < 4 && j < 4; j++, i++) {
         if (chessboard[i][j] == 1) {
@@ -296,8 +238,62 @@ int winning(int chessboard[5][5]) {
             count_black = 0;
         }
     }
+    /* Verif horizontale */
+    for (j = 0; j < 5 ; j++) {
+        for (i = 0; i < 5 ;i++) {
+            if (chessboard[j][i] == 2) {
+                count_black += 1;
+                if (count_black == 4) {
+                    return 2;
+                }
+            }
+            else {
+                count_black = 0;
+            }
+        }
+    }
+    for (j = 0; j < 5; j++) {
+        for (i = 0; i < 5; i++) {
+            if (chessboard[j][i] == 2) {
+                count_white += 1;
+                if (count_white == 4) {
+                    return 2;
+                }
+            }
+            else {
+                count_white = 0;
+            }
+        }
+    }
     count_black = 0;
     count_white = 0;
+    /* Verif verticale */
+    for (j = 0; j < 5; j++) {
+        for (i = 0; i < 5; i++) {
+            if (chessboard[i][j] == 2) {
+                count_black += 1;
+                if (count_black == 4) {
+                    return 2;
+                }
+            }
+            else {
+                count_black = 0;
+            }
+        }
+    }
+    for (j = 0; j < 5; j++) {
+        for (i = 0; i < 5; i++) {
+            if (chessboard[i][j] == 2) {
+                count_white += 1;
+                if (count_white == 4) {
+                    return 2;
+                }
+            }
+            else {
+                count_white = 0;
+            }
+        }
+    }
     return 0;
 }
 
