@@ -520,7 +520,6 @@ int main(void) {
                             {2,0,0,0,1},
                             {0,0,0,0,0},
                             {2,1,2,1,2} };
-    int chessboard[5][5];
     int choix;
     do {
         printf("\033[4;37mQue voulez vous faire :\033[0m\n 1 - Nouvelle partie\n 2 - Reprendre une partie\n");
