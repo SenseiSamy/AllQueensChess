@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
-#pragma warning(disable : 4996)
 typedef struct position
 {
     int x;
