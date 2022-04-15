@@ -10,13 +10,13 @@ typedef struct position
 
 
 /*-- Fonction de sauvegardes --*/
-void lire_chessboard(FILE* fichier, int chessboard[5][5]) {
+void lire_chessboard(FILE* fichier, int *chessboard) {
     /*Lit un fichier stockant le chessboard et rempli un tableau décrivant le plateau*/
     fichier = fopen("sauvegarde.txt", "r");
     if (fichier != NULL) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             /* lit le fichier et mets les valeurs dans le tableau  */
-            fscanf(fichier, "%d%d%d%d%d\n", &chessboard[i][0], &chessboard[i][1], &chessboard[i][2], &chessboard[i][3], &chessboard[i][4]);
+            fscanf(fichier, "%d %d %d %d %d\n", (chessboard + (i*5) ), (chessboard + (i * 5)+1 ), (chessboard + (i * 5)+2), (chessboard + (i * 5)+3), (chessboard + (i * 5)+4));
         }
         fclose(fichier);
     }
@@ -29,7 +29,7 @@ void ecrire_chessboard(int chessboard[5][5], FILE* fichier) {
     {
         for (int i = 0; i < 5; i++)
         {
-            fprintf(fichier, "%d%d%d%d%d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2], chessboard[i][3], chessboard[i][4]);
+            fprintf(fichier, "%d %d %d %d %d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2], chessboard[i][3], chessboard[i][4]);
         }
         fclose(fichier);
     }

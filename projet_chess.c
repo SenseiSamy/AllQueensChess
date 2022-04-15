@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
-#pragma warning(disable : 4996)
 typedef struct position
 {
     int x;
@@ -11,13 +10,13 @@ typedef struct position
 
 
 /*-- Fonction de sauvegardes --*/
-void lire_chessboard(FILE* fichier, int chessboard[5][5]) {
+void lire_chessboard(FILE* fichier, int *chessboard) {
     /*Lit un fichier stockant le chessboard et rempli un tableau décrivant le plateau*/
     fichier = fopen("sauvegarde.txt", "r");
     if (fichier != NULL) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             /* lit le fichier et mets les valeurs dans le tableau  */
-            fscanf(fichier, "%d%d%d%d%d\n", &chessboard[i][0], &chessboard[i][1], &chessboard[i][2], &chessboard[i][3], &chessboard[i][4]);
+            fscanf(fichier, "%d %d %d %d %d\n", (chessboard + (i*5) ), (chessboard + (i * 5)+1 ), (chessboard + (i * 5)+2), (chessboard + (i * 5)+3), (chessboard + (i * 5)+4));
         }
         fclose(fichier);
     }
@@ -30,7 +29,7 @@ void ecrire_chessboard(int chessboard[5][5], FILE* fichier) {
     {
         for (int i = 0; i < 5; i++)
         {
-            fprintf(fichier, "%d%d%d%d%d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2], chessboard[i][3], chessboard[i][4]);
+            fprintf(fichier, "%d %d %d %d %d\n", chessboard[i][0], chessboard[i][1], chessboard[i][2], chessboard[i][3], chessboard[i][4]);
         }
         fclose(fichier);
     }
@@ -353,7 +352,7 @@ int winning(int chessboard[5][5]) {
 
 void afficher_chessboard(int chessboard[5][5]) {
     /*Affiche le chessboard dans le terminal*/
-    printf("\033[1;1H\033[2J"); /*Clear le terminal*/
+    //printf("\033[1;1H\033[2J"); /*Clear le terminal*/
     printf("     A   B   C   D   E\n");
     printf("   ---------------------\n");
     for (int i = 0; i < 5; i++)
@@ -516,19 +515,19 @@ joueur2:
 }
 
 int main(void) {
-    int chessboard[5][5] = { {1,2,1,2,1},
+    /*int chessboard[5][5] = {{1,2,1,2,1},
                             {0,0,0,0,0},
                             {2,0,0,0,1},
                             {0,0,0,0,0},
-                            {2,1,2,1,2} };
+                            {2,1,2,1,2} };*/
+    int chessboard[5][5];
     int choix;
     do {
         printf("\033[4;37mQue voulez vous faire :\033[0m\n 1 - Nouvelle partie\n 2 - Reprendre une partie\n");
         scanf("%d", &choix);
-        //printf("\033[1;1H\033[2J");
     } while (choix != 1 && choix != 2);
     if (choix == 2)
-        lire_chessboard(NULL, chessboard);
+        lire_chessboard(NULL, &chessboard[0][0]);
     while (winning(chessboard) == 0) /*Boucle principale du programme*/
     {
         afficher_chessboard(chessboard);
