@@ -352,7 +352,7 @@ int winning(int chessboard[5][5]) {
 
 void afficher_chessboard(int chessboard[5][5]) {
     /*Affiche le chessboard dans le terminal*/
-    //printf("\033[1;1H\033[2J"); /*Clear le terminal*/
+    printf("\033[1;1H\033[2J"); /*Clear le terminal*/
     printf("     A   B   C   D   E\n");
     printf("   ---------------------\n");
     for (int i = 0; i < 5; i++)
